@@ -1,16 +1,17 @@
+import logging
 import random
 from time import sleep
 
 from jets import F16, F18
 from utils import p_by_distance
-import logging
 
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    filename="logs/dogfight.log"
+    filename="logs/dogfight.log",
 )
+
 
 def main():
 
@@ -33,15 +34,21 @@ def main():
         zero_to_one_rand_attacker = random.uniform(0, 1)
         zero_to_one_rand_defender = random.uniform(0, 1)
 
-        logging.debug(f"Random cannon hit numbers generated: Attacker={zero_to_one_rand_attacker}, Defender={zero_to_one_rand_defender}")
+        logging.debug(
+            f"Random cannon hit numbers generated: Attacker={zero_to_one_rand_attacker}, Defender={zero_to_one_rand_defender}"
+        )
 
         eng_duration_secs = random.uniform(0, 10)
-        logging.info(f"They each fire their cannons for {eng_duration_secs:.2f} seconds")
+        logging.info(
+            f"They each fire their cannons for {eng_duration_secs:.2f} seconds"
+        )
         sleep(eng_duration_secs)
-        
+
         p_a, p_d = p_by_distance(attacker=f16, defender=f18, d_ab=distance)
-        
-        logging.debug(f"Probabilities of the attacker hitting defender is {p_a:.4f}, and defender hitting attacker is {p_d:.4f}")
+
+        logging.debug(
+            f"Probabilities of the attacker hitting defender is {p_a:.4f}, and defender hitting attacker is {p_d:.4f}"
+        )
 
         # shoot and obtain damage
         # TODO: damage is only inflicted if it hits target
@@ -74,6 +81,7 @@ def main():
             break
 
     logging.info("Dogfight simulation completed.")
+
 
 if __name__ == "__main__":
     main()
