@@ -17,11 +17,11 @@ def main():
     f16 = F16()
     f18 = F18()
 
-    start_distance = 100
+    start_distance = 1000
 
     logging.info(f"Dogfight initiated at a starting distance of {start_distance}")
 
-    for distance in range(start_distance, 0, -25):
+    for distance in range(start_distance, 0, -125):
 
         logging.info(f"They engage at a distance of {distance}")
 
