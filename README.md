@@ -1,0 +1,1 @@
+with the p dist over distance, we have generate a random number between 0 and 1 and see if said number is <= p(distance)
