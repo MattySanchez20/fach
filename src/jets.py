@@ -42,6 +42,17 @@ class JetFighter(ABC):
     def calculate_cross_sectional_area(self):
         pass
 
+    def __str__(self):
+        return str({
+            "Jet Fighter": f"{self.name}",
+            "Health": f"{self.health}%",
+            "Cannon Ammo": f"{self.cannon_ammo}",
+            "Fire Rate": f"{self.fire_rate} rounds/sec",
+            "Wingspan": f"{self.wingspan} meters",
+            "Damage per Round": f"{self.damage_per_round * 100}%",
+            "Cannon Spread": f"{math.degrees(self.cannon_spread_rads):.2f} degrees"
+        })
+
 
 class F16(JetFighter):
 
@@ -56,6 +67,7 @@ class F16(JetFighter):
             cannon_spread_rads=math.radians(4),
         )
 
+    # TODO: add ammo constraints
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
@@ -102,7 +114,7 @@ class F18(JetFighter):
             damage_per_round=3 / 100,
             cannon_spread_rads=math.radians(6),
         )
-
+    # TODO: add ammo constraints
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds

@@ -43,9 +43,13 @@ def main():
         
         logging.debug(f"Probabilities of the attacker hitting defender is {p_a:.4f}, and defender hitting attacker is {p_d:.4f}")
 
+        # shoot and obtain damage
+        # TODO: damage is only inflicted if it hits target
+        f18_damage_to_f16 = f18.shoot(eng_duration_secs)
+        f16_damage_to_f18 = f16.shoot(eng_duration_secs)
+
         if p_d >= zero_to_one_rand_defender:
             logging.info("F18 has hit the F16!")
-            f18_damage_to_f16 = f18.shoot(eng_duration_secs)
             logging.debug(f"F18 damage to F16: {f18_damage_to_f16}")
             f16.deduct_health(damage=f18_damage_to_f16)
         else:
@@ -53,7 +57,6 @@ def main():
 
         if p_a >= zero_to_one_rand_attacker:
             logging.info("F16 has hit the F18!")
-            f16_damage_to_f18 = f16.shoot(eng_duration_secs)
             logging.debug(f"F16 damage to F18: {f16_damage_to_f18}")
             f18.deduct_health(damage=f16_damage_to_f18)
         else:
