@@ -59,12 +59,14 @@ def main():
             logging.info("F18 has hit the F16!")
             logging.debug(f"F18 damage to F16: {f18_damage_to_f16}")
             f16_health_post_engagement = f16.deduct_health(damage=f18_damage_to_f16)
-            
+
             if f16_health_post_engagement <= 0:
                 logging.info("The F16 has been destroyed. Ending dogfight.")
                 break
 
-            logging.info(f"F16's health after taking damage: {f16_health_post_engagement}")
+            logging.info(
+                f"F16's health after taking damage: {f16_health_post_engagement}"
+            )
         else:
             logging.info("F18 has missed!")
 
@@ -77,12 +79,13 @@ def main():
                 logging.info("The F18 has been destroyed. Ending dogfight.")
                 break
 
-            logging.info(f"F18's health after taking damage: {f18_health_post_engagement}")
+            logging.info(
+                f"F18's health after taking damage: {f18_health_post_engagement}"
+            )
         else:
             logging.info("F16 has missed!")
 
         logging.debug(f"Post-engagement states:\nF16={f16}\nF18={f18}")
-
 
     logging.info("Dogfight simulation completed.")
 
