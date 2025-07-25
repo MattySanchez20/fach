@@ -38,7 +38,9 @@ def main():
         logging.info("FIGHTING......")
         duration = random.uniform(0, 10)
         sleep(duration)
-        logging.info(f"Both jets fired cannons for {duration} seconds at a distance of {distance}")
+        logging.info(
+            f"Both jets fired cannons for {duration} seconds at a distance of {distance}"
+        )
 
         # TODO: dogfight is not the right word, it should be exchange
         dogfight_details = dogfight(
@@ -59,6 +61,18 @@ def main():
 
         if f2_health_post_hit <= 0:
             logging.info(f"The {fighter1.name} has destroyed the {fighter2.name}")
+            break
+
+        if f1_ammo_left == 0:
+            logging.info(
+                f"The {fighter1.name} has run out of ammo. It puts on the afterburners and escapes."
+            )
+            break
+
+        if f2_ammo_left == 0:
+            logging.info(
+                f"The {fighter2.name} has run out of ammo. It puts on the afterburners and escapes."
+            )
             break
 
         if f1_hit_bool:

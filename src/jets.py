@@ -66,7 +66,7 @@ class F16(JetFighter):
         super().__init__(
             name="F16",
             health=100,
-            cannon_ammo=100000000,
+            cannon_ammo=3000,
             fire_rate=80,
             wingspan=45,
             damage_per_round=5 / 100,
@@ -76,6 +76,9 @@ class F16(JetFighter):
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
+
+        if self.cannon_ammo < 0:
+            self.cannon_ammo = 0
 
         return self.cannon_ammo
 
@@ -109,7 +112,7 @@ class F18(JetFighter):
         super().__init__(
             name="F18",
             health=100,
-            cannon_ammo=100000000,
+            cannon_ammo=4000,
             fire_rate=50,
             wingspan=50,
             damage_per_round=30 / 100,
@@ -119,6 +122,9 @@ class F18(JetFighter):
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
+
+        if self.cannon_ammo < 0:
+            self.cannon_ammo = 0
 
         return self.cannon_ammo
 
@@ -152,7 +158,7 @@ class F22(JetFighter):
         super().__init__(
             name="F22",
             health=100,
-            cannon_ammo=100000000,
+            cannon_ammo=2000,
             fire_rate=60,
             wingspan=60,
             damage_per_round=80 / 100,
@@ -162,6 +168,9 @@ class F22(JetFighter):
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
+
+        if self.cannon_ammo < 0:
+            self.cannon_ammo = 0
 
         return self.cannon_ammo
 
