@@ -1,9 +1,7 @@
 import math
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 
 
-@dataclass
 class JetFighter(ABC):
 
     def __init__(
