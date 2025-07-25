@@ -1,67 +1,88 @@
 import math
 import random
-from time import sleep
 
 from jets import JetFighter
 
 
-def _calculate_cannon_spread_area(d_ab: float, jet: JetFighter):
+def _calculate_cannon_spread_area(d_12: float, jet: JetFighter):
 
-    jet_cannon_spread_area = (math.tan(jet.cannon_spread_rads) * d_ab) ** 2 * 3.141
+    jet_cannon_spread_area = (math.tan(jet.cannon_spread_rads) * d_12) ** 2 * 3.141
 
     return jet_cannon_spread_area
 
 
-def p_by_distance(attacker: JetFighter, defender: JetFighter, d_ab):
+def p_by_distance(fighter1: JetFighter, fighter2: JetFighter, d_12):
 
-    attacker_cannon_spread_area = _calculate_cannon_spread_area(d_ab=d_ab, jet=attacker)
-    defender_cannon_spread_area = _calculate_cannon_spread_area(d_ab=d_ab, jet=defender)
+    fighter1_cannon_spread_area = _calculate_cannon_spread_area(d_12=d_12, jet=fighter1)
+    fighter2_cannon_spread_area = _calculate_cannon_spread_area(d_12=d_12, jet=fighter2)
 
-    attacker_cross_sectional_area = attacker.calculate_cross_sectional_area()
-    defender_cross_sectional_area = defender.calculate_cross_sectional_area()
+    fighter1_cross_sectional_area = fighter1.calculate_cross_sectional_area()
+    fighter2_cross_sectional_area = fighter2.calculate_cross_sectional_area()
 
-    if attacker_cannon_spread_area <= defender_cross_sectional_area:
-        p_a = float(1)
+    if fighter1_cannon_spread_area <= fighter2_cross_sectional_area:
+        p_1 = float(1)
     else:
-        p_a = float(defender_cross_sectional_area / attacker_cannon_spread_area)
+        p_1 = float(fighter2_cross_sectional_area / fighter1_cannon_spread_area)
 
-    if defender_cannon_spread_area <= attacker_cross_sectional_area:
-        p_d = float(1)
+    if fighter2_cannon_spread_area <= fighter1_cross_sectional_area:
+        p_2 = float(1)
     else:
-        p_d = float(attacker_cross_sectional_area / defender_cannon_spread_area)
+        p_2 = float(fighter1_cross_sectional_area / fighter2_cannon_spread_area)
 
-    return (p_a, p_d)
+    return (p_1, p_2)
+
+def hit_or_miss(p_1: float, p_2: float):
+    f1_zero_to_one_rand_float = random.uniform(0, 1)
+    f2_zero_to_one_rand_float = random.uniform(0, 1)
+    
+    f1_hit = False
+    f2_hit = False
+
+    if p_1 >= f1_zero_to_one_rand_float:
+        # f1 hit f2
+        f1_hit = True
+
+    if p_2 >= f2_zero_to_one_rand_float:
+        # f2 hit f1
+        f2_hit = True
+
+    return f1_hit, f2_hit
 
 
-def dogfight(attacker: JetFighter, defender: JetFighter):
+def dogfight(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
+    """1 V 1 A Single Exchange"""
 
-    # pick a random number between 0 and 1 for each pilot
-    zero_to_one_rand_attacker = random.uniform(0, 1)
-    zero_to_one_rand_defender = random.uniform(0, 1)
+    # obtain probabilities for given distance
+    p_1, p_2 = p_by_distance(fighter1=fighter1, fighter2=fighter2, d_12=distance)
 
-    distance_rand = random.uniform(0, 1000)
+    # add if statement to check for hit or miss
+    f1_hit_bool, f2_hit_bool = hit_or_miss(p_1=p_1, p_2=p_2)
 
-    eng_duration_secs = random.uniform(0, 10)
+    # shoot cannons
+    f1_ammo_left = fighter1.shoot(duration=duration)
+    f2_ammo_left = fighter2.shoot(duration=duration)
 
-    p_a, p_b = p_by_distance(attacker=attacker, defender=defender, d_ab=distance_rand)
+    # has fighter1 hit fighter2?
+    if f1_hit_bool:
 
-    print("\nFIGHTING.................")
-    sleep(eng_duration_secs)
+        f1_damage_inflicted_on_f2 = fighter1.calculate_damage(duration=duration)
 
-    print(
-        f"\nDogfight details:\ndistance={distance_rand}\nduration={eng_duration_secs}"
-    )
+        f2_health_post_hit = fighter2.deduct_health(damage=f1_damage_inflicted_on_f2)
+    else: # no hit
+        f1_damage_inflicted_on_f2 = 0
+        f2_health_post_hit = fighter2.health
 
-    if p_b >= zero_to_one_rand_defender:
+    # has fighter2 hit fighter1?
+    if f2_hit_bool:
 
-        attacker.health -= attacker.fire_rate * eng_duration_secs
+        f2_damage_inflicted_on_f1 = fighter2.calculate_damage(duration=duration)
 
-        print(f"B52 has hit the F16")
-        print(f"F16's health reduced to {attacker.health}%")
+        f1_health_post_hit = fighter1.deduct_health(damage=f2_damage_inflicted_on_f1)
+    else: # no hit
+        f2_damage_inflicted_on_f1 = 0
+        f1_health_post_hit = fighter1.health
 
-    if p_a >= zero_to_one_rand_attacker:
-
-        defender.health -= defender.fire_rate * eng_duration_secs
-
-        print("F16 has hit the B52")
-        print(f"B52's health reduced to {defender.health}%")
+    return {
+        "fighter1": [f1_ammo_left, f1_health_post_hit, f1_hit_bool, f2_damage_inflicted_on_f1],
+        "fighter2": [f2_ammo_left, f2_health_post_hit, f2_hit_bool, f1_damage_inflicted_on_f2],
+    }

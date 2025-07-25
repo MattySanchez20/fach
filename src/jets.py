@@ -23,11 +23,11 @@ class JetFighter(ABC):
         self.cannon_spread_rads = cannon_spread_rads
 
     @abstractmethod
-    def shoot(self):
+    def shoot(self, duration: float):
         pass
 
     @abstractmethod
-    def deduct_health(self):
+    def deduct_health(self, damage):
         pass
 
     @abstractmethod
@@ -40,6 +40,10 @@ class JetFighter(ABC):
 
     @abstractmethod
     def calculate_cross_sectional_area(self):
+        pass
+
+    @abstractmethod
+    def calculate_damage(self, duration):
         pass
 
     def __str__(self):
@@ -69,14 +73,11 @@ class F16(JetFighter):
             cannon_spread_rads=math.radians(4),
         )
 
-    # TODO: add ammo constraints
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
 
-        damage = n_rounds * self.damage_per_round
-
-        return damage
+        return self.cannon_ammo
 
     def deduct_health(self, damage):
         self.health -= damage
@@ -98,6 +99,8 @@ class F16(JetFighter):
 
         return cross_sectional_area
 
+    def calculate_damage(self, duration):
+        return duration * self.fire_rate * self.damage_per_round
 
 class F18(JetFighter):
 
@@ -112,14 +115,11 @@ class F18(JetFighter):
             cannon_spread_rads=math.radians(6),
         )
 
-    # TODO: add ammo constraints
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
         self.cannon_ammo -= n_rounds
 
-        damage = n_rounds * self.damage_per_round
-
-        return damage
+        return self.cannon_ammo
 
     def deduct_health(self, damage):
         self.health -= damage
@@ -140,3 +140,6 @@ class F18(JetFighter):
         cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 
         return cross_sectional_area
+
+    def calculate_damage(self, duration):
+        return duration * self.fire_rate * self.damage_per_round
