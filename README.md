@@ -1,4 +1,4 @@
-# FACH - Fighter Aircraft Combat Simulator
+# FACH - Fighter Aircraft Combat Simulator (LOG WARS)
 
 A Python-based air combat simulation that models dogfights between different fighter aircraft types. The simulator features realistic combat mechanics including distance-based hit probability calculations, weapon systems modeling, and health management.
 
