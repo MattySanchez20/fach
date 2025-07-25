@@ -31,7 +31,7 @@ def main():
     logging.debug(f"{fighter2.name} initial state: {fighter2}")
 
     start_distance = 800
-    logging.info(f"Dogfight initiated at a starting distance of {start_distance}")
+    logging.info(f"Dogfight initiated at a starting distance of {start_distance}...")
 
     for distance in range(start_distance, 0, -5):
 
@@ -39,7 +39,7 @@ def main():
         duration = random.uniform(0, 10)
         sleep(duration)
         logging.info(
-            f"Both jets fired cannons for {duration} seconds at a distance of {distance}"
+            f"Both jets fired cannons for {duration} seconds at a distance of {distance}..."
         )
 
         # TODO: dogfight is not the right word, it should be exchange
@@ -56,11 +56,11 @@ def main():
         )
 
         if f1_health_post_hit <= 0:
-            logging.info(f"The {fighter2.name} has destroyed the {fighter1.name}")
+            logging.info(f"The {fighter2.name} has destroyed the {fighter1.name}.")
             break
 
         if f2_health_post_hit <= 0:
-            logging.info(f"The {fighter1.name} has destroyed the {fighter2.name}")
+            logging.info(f"The {fighter1.name} has destroyed the {fighter2.name}.")
             break
 
         if f1_ammo_left == 0:
@@ -77,20 +77,20 @@ def main():
 
         if f1_hit_bool:
             logging.info(
-                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}"
+                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}..."
             )
         else:
             logging.info(
-                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent"
+                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent..."
             )
 
         if f2_hit_bool:
             logging.info(
-                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}"
+                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}..."
             )
         else:
             logging.info(
-                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent"
+                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent..."
             )
 
 
