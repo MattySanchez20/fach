@@ -14,7 +14,7 @@ class JetFighter(ABC):
         fire_rate,
         wingspan,
         damage_per_round,
-        cannon_spread_degs,
+        cannon_spread_rads,
     ):
         self.name = name
         self.health = health
@@ -22,7 +22,7 @@ class JetFighter(ABC):
         self.fire_rate = fire_rate
         self.wingspan = wingspan
         self.damage_per_round = damage_per_round
-        self.cannon_spread_degs = cannon_spread_degs
+        self.cannon_spread_rads = cannon_spread_rads
 
     @abstractmethod
     def shoot(self):
@@ -51,9 +51,8 @@ class F16(JetFighter):
             fire_rate=40,
             wingspan=45,
             damage_per_round=5 / 100,
-            cannon_spread_degs=4,
+            cannon_spread_rads=math.radians(4),
         )
-        self.cannon_spread_rads = math.radians(self.cannon_spread_degs)
         self.cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 
     def shoot(self, duration: float):
@@ -95,9 +94,8 @@ class F18(JetFighter):
             fire_rate=50,
             wingspan=50,
             damage_per_round=3 / 100,
-            cannon_spread_degs=6,
+            cannon_spread_rads=math.radians(6),
         )
-        self.cannon_spread_rads = math.radians(self.cannon_spread_degs)
         self.cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 
     def shoot(self, duration: float):
