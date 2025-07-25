@@ -24,8 +24,8 @@ def main():
     fighter1 = F16()
     fighter2 = F22()
 
-    logging.info(f"{fighter1.name} initialized successfully.")
-    logging.info(f"{fighter2.name} initialized successfully.")
+    logging.info(f"{fighter1.name} initialized successfully. Jet Specs: {fighter1}")
+    logging.info(f"{fighter2.name} initialized successfully. Jet Specs: {fighter2}")
 
     logging.debug(f"{fighter1.name} initial state: {fighter1}")
     logging.debug(f"{fighter2.name} initial state: {fighter2}")
