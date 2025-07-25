@@ -6,7 +6,7 @@ from jets import F16, F18
 from utils import p_by_distance
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     filename="logs/dogfight.log",
@@ -23,10 +23,10 @@ def main():
     logging.debug(f"F16 initial state: {f16}")
     logging.debug(f"F18 initial state: {f18}")
 
-    start_distance = 1024
+    start_distance = 500
     logging.info(f"Dogfight initiated at a starting distance of {start_distance}")
 
-    for distance in range(start_distance, 0, -8):
+    for distance in range(start_distance, 0, -5):
 
         logging.info(f"They engage at a distance of {distance}")
         logging.debug(f"Current engagement distance: {distance}")
@@ -51,34 +51,38 @@ def main():
         )
 
         # shoot and obtain damage
-        # TODO: damage is only inflicted if it hits target
+        # TODO: damage should only inflicted if it hits target, this says it has made damage
         f18_damage_to_f16 = f18.shoot(eng_duration_secs)
         f16_damage_to_f18 = f16.shoot(eng_duration_secs)
 
         if p_d >= zero_to_one_rand_defender:
             logging.info("F18 has hit the F16!")
             logging.debug(f"F18 damage to F16: {f18_damage_to_f16}")
-            f16.deduct_health(damage=f18_damage_to_f16)
+            f16_health_post_engagement = f16.deduct_health(damage=f18_damage_to_f16)
+            
+            if f16_health_post_engagement <= 0:
+                logging.info("The F16 has been destroyed. Ending dogfight.")
+                break
+
+            logging.info(f"F16's health after taking damage: {f16_health_post_engagement}")
         else:
             logging.info("F18 has missed!")
 
         if p_a >= zero_to_one_rand_attacker:
             logging.info("F16 has hit the F18!")
             logging.debug(f"F16 damage to F18: {f16_damage_to_f18}")
-            f18.deduct_health(damage=f16_damage_to_f18)
+            f18_health_post_engagement = f18.deduct_health(damage=f16_damage_to_f18)
+
+            if f18_health_post_engagement <= 0:
+                logging.info("The F18 has been destroyed. Ending dogfight.")
+                break
+
+            logging.info(f"F18's health after taking damage: {f18_health_post_engagement}")
         else:
             logging.info("F16 has missed!")
 
-        f16_health_post_engagement = f16.obtain_health()
-        f18_health_post_engagement = f18.obtain_health()
+        logging.debug(f"Post-engagement states:\nF16={f16}\nF18={f18}")
 
-        logging.info(f"F16's health after engagement: {f16_health_post_engagement}")
-        logging.info(f"F18's health after engagement: {f18_health_post_engagement}")
-        logging.debug(f"Post-engagement states: F16={f16}, F18={f18}")
-
-        if f16_health_post_engagement <= 0 or f18_health_post_engagement <= 0:
-            logging.info("One of the jets has been destroyed. Ending dogfight.")
-            break
 
     logging.info("Dogfight simulation completed.")
 

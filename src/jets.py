@@ -62,8 +62,8 @@ class F16(JetFighter):
         super().__init__(
             name="F16",
             health=100,
-            cannon_ammo=120,
-            fire_rate=40,
+            cannon_ammo=100000000,
+            fire_rate=80,
             wingspan=45,
             damage_per_round=5 / 100,
             cannon_spread_rads=math.radians(4),
@@ -110,10 +110,10 @@ class F18(JetFighter):
         super().__init__(
             name="F18",
             health=100,
-            cannon_ammo=240,
+            cannon_ammo=100000000,
             fire_rate=50,
             wingspan=50,
-            damage_per_round=3 / 100,
+            damage_per_round=30 / 100,
             cannon_spread_rads=math.radians(6),
         )
 
