@@ -40,6 +40,10 @@ class JetFighter(ABC):
     def obtain_health(self):
         pass
 
+    @abstractmethod
+    def calculate_cross_sectional_area(self):
+        pass
+
 
 class F16(JetFighter):
 
@@ -53,7 +57,6 @@ class F16(JetFighter):
             damage_per_round=5 / 100,
             cannon_spread_rads=math.radians(4),
         )
-        self.cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
@@ -82,6 +85,11 @@ class F16(JetFighter):
 
     def obtain_health(self):
         return self.health
+    
+    def calculate_cross_sectional_area(self):
+        cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
+
+        return cross_sectional_area
 
 
 class F18(JetFighter):
@@ -96,7 +104,6 @@ class F18(JetFighter):
             damage_per_round=3 / 100,
             cannon_spread_rads=math.radians(6),
         )
-        self.cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 
     def shoot(self, duration: float):
         n_rounds = duration * self.fire_rate
@@ -125,3 +132,8 @@ class F18(JetFighter):
 
     def obtain_health(self):
         return self.health
+
+    def calculate_cross_sectional_area(self):
+        cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
+
+        return cross_sectional_area

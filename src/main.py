@@ -29,21 +29,15 @@ def main():
 
             print("F18 has hit the F16")
 
-            f16_damage_incurred = (
-                f18.damage_per_round * f18.fire_rate * eng_duration_secs
-            )
-
-            f16.deduct_health(damage=f16_damage_incurred)
+            f18_damage_to_f16 = f18.shoot(eng_duration_secs)
+            f16.deduct_health(damage=f18_damage_to_f16)
 
         if p_a >= zero_to_one_rand_attacker:
 
             print("F16 has hit the f18")
 
-            f18_damage_incurred = (
-                f16.damage_per_round * f16.fire_rate * eng_duration_secs
-            )
-
-            f18.deduct_health(damage=f18_damage_incurred)
+            f16_damage_to_f18 = f16.shoot(eng_duration_secs)
+            f18.deduct_health(damage=f16_damage_to_f18)
 
         f16_health_post_engagement = f16.obtain_health()
         f18_health_post_engagement = f18.obtain_health()

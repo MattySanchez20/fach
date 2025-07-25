@@ -4,25 +4,31 @@ from time import sleep
 
 from jets import JetFighter
 
+def _calculate_cannon_spread_area(d_ab: float, jet: JetFighter):
+
+    jet_cannon_spread_area = (
+        math.tan(jet.cannon_spread_rads) * d_ab
+    ) ** 2 * 3.141
+
+    return jet_cannon_spread_area
 
 def p_by_distance(attacker: JetFighter, defender: JetFighter, d_ab):
 
-    attacker_cannon_spread_area = (
-        math.tan(attacker.cannon_spread_rads) * d_ab
-    ) ** 2 * 3.141
-    defender_cannon_spread_area = (
-        math.tan(defender.cannon_spread_rads) * d_ab
-    ) ** 2 * 3.141
+    attacker_cannon_spread_area = _calculate_cannon_spread_area(d_ab=d_ab, jet=attacker)
+    defender_cannon_spread_area = _calculate_cannon_spread_area(d_ab=d_ab, jet=defender)
 
-    if attacker_cannon_spread_area <= defender.cross_sectional_area:
+    attacker_cross_sectional_area = attacker.calculate_cross_sectional_area()
+    defender_cross_sectional_area = defender.calculate_cross_sectional_area()
+
+    if attacker_cannon_spread_area <= defender_cross_sectional_area:
         p_a = float(1)
     else:
-        p_a = float(defender.cross_sectional_area / attacker_cannon_spread_area)
+        p_a = float(defender_cross_sectional_area / attacker_cannon_spread_area)
 
-    if defender_cannon_spread_area <= attacker.cross_sectional_area:
+    if defender_cannon_spread_area <= attacker_cross_sectional_area:
         p_d = float(1)
     else:
-        p_d = float(attacker.cross_sectional_area / defender_cannon_spread_area)
+        p_d = float(attacker_cross_sectional_area / defender_cannon_spread_area)
 
     return (p_a, p_d)
 
