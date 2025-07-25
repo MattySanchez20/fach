@@ -76,8 +76,6 @@ class F16(JetFighter):
 
         damage = n_rounds * self.damage_per_round
 
-        print(f"Fired {n_rounds} rounds\nDealt {damage}% damage")
-
         return damage
 
     def deduct_health(self, damage):
@@ -85,13 +83,10 @@ class F16(JetFighter):
         if self.health < 0:
             self.health = 0
 
-        print(f"Deducted {damage}% health")
-
         return self.health
 
     def add_health(self, health_points):
         self.health += health_points
-        print(f"Added {health_points}% health")
 
         return self.health
 
@@ -124,8 +119,6 @@ class F18(JetFighter):
 
         damage = n_rounds * self.damage_per_round
 
-        print(f"Fired {n_rounds} rounds\nDealt {damage}% damage")
-
         return damage
 
     def deduct_health(self, damage):
@@ -133,13 +126,10 @@ class F18(JetFighter):
         if self.health < 0:
             self.health = 0
 
-        print(f"Deducted {damage}% health")
-
         return self.health
 
     def add_health(self, health_points):
         self.health += health_points
-        print(f"Added {health_points}% health")
 
         return self.health
 
