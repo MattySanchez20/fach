@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 from time import sleep
 
-from jets import F16, F22
+from jets import F16, F18
 from utils import exchange
 
 log_filename = f"dogfight_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
@@ -22,7 +22,7 @@ def main():
 
     logging.info("Initializing jets...")
     fighter1 = F16()
-    fighter2 = F22()
+    fighter2 = F18()
 
     logging.info(f"{fighter1.name} initialized successfully. Jet Specs: {fighter1}")
     logging.info(f"{fighter2.name} initialized successfully. Jet Specs: {fighter2}")
@@ -30,10 +30,10 @@ def main():
     logging.debug(f"{fighter1.name} initial state: {fighter1}")
     logging.debug(f"{fighter2.name} initial state: {fighter2}")
 
-    start_distance = 1700
+    start_distance = 700
     logging.info(f"Dogfight initiated at a starting distance of {start_distance}...")
 
-    for distance in range(start_distance, 0, -5):
+    for distance in range(start_distance, 0, -50):
 
         logging.info("FIGHTING......")
         duration = random.uniform(0, 10)

@@ -70,7 +70,7 @@ class F16(JetFighter):
             fire_rate=80,
             wingspan=45,
             damage_per_round=5 / 100,
-            cannon_spread_rads=math.radians(4),
+            cannon_spread_rads=math.radians(3),
         )
 
     def shoot(self, duration: float):
