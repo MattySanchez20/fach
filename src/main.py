@@ -30,7 +30,7 @@ def main():
     logging.debug(f"{fighter1.name} initial state: {fighter1}")
     logging.debug(f"{fighter2.name} initial state: {fighter2}")
 
-    start_distance = 800
+    start_distance = 1700
     logging.info(f"Dogfight initiated at a starting distance of {start_distance}...")
 
     for distance in range(start_distance, 0, -5):
