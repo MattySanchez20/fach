@@ -1,18 +1,22 @@
 import logging
 import random
+from datetime import datetime
 from time import sleep
 
 from jets import F16, F18
 from utils import p_by_distance
 
+log_filename = f"dogfight_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    filename="logs/dogfight.log",
+    filename=f"logs/{log_filename}",
 )
 
 
+# TODO: this big function can be split into smaller ones
 def main():
 
     logging.info("Initializing jets...")
@@ -23,7 +27,7 @@ def main():
     logging.debug(f"F16 initial state: {f16}")
     logging.debug(f"F18 initial state: {f18}")
 
-    start_distance = 500
+    start_distance = 800
     logging.info(f"Dogfight initiated at a starting distance of {start_distance}")
 
     for distance in range(start_distance, 0, -5):
