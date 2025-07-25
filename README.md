@@ -7,28 +7,38 @@ A Python-based air combat simulation that models dogfights between different fig
 ## Features
 
 - **Realistic Combat Physics**: Distance-based hit probability calculations using cannon spread and aircraft cross-sectional areas
-- **Multiple Aircraft Types**: Currently supports F-16 Fighting Falcon and F/A-18 Hornet with unique specifications
+- **Multiple Aircraft Types**: Currently supports F-16 Fighting Falcon, F/A-18 Hornet, and F-22 Raptor with unique specifications
 - **Dynamic Combat Scenarios**: Variable engagement distances, durations, and random elements
 - **Extensible Design**: Abstract base class architecture allows easy addition of new aircraft types
-- **Combat Logging**: Detailed engagement feedback and health tracking throughout battles
+- **Advanced Logging System**: Comprehensive file-based logging with timestamps and detailed combat analytics
+- **Modular Combat System**: Refactored exchange-based combat mechanics with hit/miss determination
+- **Enhanced Ammunition Management**: Realistic ammunition tracking with depletion mechanics
 
 ## Aircraft Specifications
 
 ### F-16 Fighting Falcon
 - **Health**: 100%
-- **Cannon Ammunition**: 120 rounds
-- **Fire Rate**: 40 rounds/second
+- **Cannon Ammunition**: 3,000 rounds
+- **Fire Rate**: 80 rounds/second
 - **Wingspan**: 45 feet
-- **Damage per Round**: 0.05%
-- **Cannon Spread**: 4 degrees
+- **Damage per Round**: 5%
+- **Cannon Spread**: 3 degrees
 
 ### F/A-18 Hornet
 - **Health**: 100%
-- **Cannon Ammunition**: 240 rounds
+- **Cannon Ammunition**: 4,000 rounds
 - **Fire Rate**: 50 rounds/second
 - **Wingspan**: 50 feet
-- **Damage per Round**: 0.03%
+- **Damage per Round**: 30%
 - **Cannon Spread**: 6 degrees
+
+### F-22 Raptor
+- **Health**: 100%
+- **Cannon Ammunition**: 2,000 rounds
+- **Fire Rate**: 60 rounds/second
+- **Wingspan**: 60 feet
+- **Damage per Round**: 80%
+- **Cannon Spread**: 2 degrees
 
 ## Installation
 
@@ -59,16 +69,16 @@ The main simulation runs a series of engagements between an F-16 and F/A-18, sta
 ### Example Output
 
 ```
-FIGHTING.................
-
-Dogfight details:
-distance=100
-duration=3.2
-
-F18 has hit the F16
-Deducted 4.8% health
-F16 Health: 95.2
-F18 Health: 100.0
+2025-07-25 19:23:58 INFO Initializing jets...
+2025-07-25 19:23:58 INFO F16 initialized successfully. Jet Specs: {'Jet Fighter': 'F16', 'Health': '100%', 'Cannon Ammo': '3000', 'Fire Rate': '80 rounds/sec', 'Wingspan': '45 meters', 'Damage per Round': '5.0%', 'Cannon Spread': '3.00 degrees'}
+2025-07-25 19:23:58 INFO F18 initialized successfully. Jet Specs: {'Jet Fighter': 'F18', 'Health': '100%', 'Cannon Ammo': '4000', 'Fire Rate': '50 rounds/sec', 'Wingspan': '50 meters', 'Damage per Round': '30.0%', 'Cannon Spread': '6.00 degrees'}
+2025-07-25 19:23:58 INFO Dogfight initiated at a starting distance of 700...
+2025-07-25 19:23:58 INFO FIGHTING......
+2025-07-25 19:24:01 INFO Both jets fired cannons for 3.19 seconds at a distance of 700...
+2025-07-25 19:24:01 INFO F16 post exchange details: health=100, cannon ammo=2744.67, damage inflicted on opponent=12.77...
+2025-07-25 19:24:01 INFO F18 post exchange details: health=87.23, cannon ammo=3840.42, no damage inflicted on opponent...
+2025-07-25 19:24:05 INFO FIGHTING......
+2025-07-25 19:24:14 INFO The F16 has destroyed the F18.
 ```
 
 ## Code Structure
