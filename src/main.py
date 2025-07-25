@@ -38,7 +38,7 @@ def main():
         logging.info("FIGHTING......")
         duration = random.uniform(0, 10)
         sleep(duration)
-        logging.info(f"Both jets fired cannons for {duration} seconds")
+        logging.info(f"Both jets fired cannons for {duration} seconds at a distance of {distance}")
 
         # TODO: dogfight is not the right word, it should be exchange
         dogfight_details = dogfight(
