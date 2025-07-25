@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 from time import sleep
 
-from jets import F16, F18, F22
+from jets import F16, F22
 from utils import dogfight
 
 log_filename = f"dogfight_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
@@ -24,7 +24,9 @@ def main():
     fighter1 = F16()
     fighter2 = F22()
 
-    logging.info("Jets initialized successfully.")
+    logging.info(f"{fighter1.name} initialized successfully.")
+    logging.info(f"{fighter2.name} initialized successfully.")
+
     logging.debug(f"{fighter1.name} initial state: {fighter1}")
     logging.debug(f"{fighter2.name} initial state: {fighter2}")
 
