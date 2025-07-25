@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 from time import sleep
 
-from jets import F16, F18
+from jets import F16, F18, F22
 from utils import dogfight
 
 log_filename = f"dogfight_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
@@ -16,12 +16,13 @@ logging.basicConfig(
 )
 
 
-# TODO: this big function can be split into smaller ones
+# TODO: exchange function rather than dogfight
+# TODO: allow dogfights between more than 2 fighters
 def main():
 
     logging.info("Initializing jets...")
     fighter1 = F16()
-    fighter2 = F18()
+    fighter2 = F22()
 
     logging.info("Jets initialized successfully.")
     logging.debug(f"{fighter1.name} initial state: {fighter1}")

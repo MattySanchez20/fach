@@ -144,3 +144,46 @@ class F18(JetFighter):
 
     def calculate_damage(self, duration):
         return duration * self.fire_rate * self.damage_per_round
+
+
+class F22(JetFighter):
+
+    def __init__(self):
+        super().__init__(
+            name="F22",
+            health=100,
+            cannon_ammo=100000000,
+            fire_rate=60,
+            wingspan=60,
+            damage_per_round=80 / 100,
+            cannon_spread_rads=math.radians(2),
+        )
+
+    def shoot(self, duration: float):
+        n_rounds = duration * self.fire_rate
+        self.cannon_ammo -= n_rounds
+
+        return self.cannon_ammo
+
+    def deduct_health(self, damage):
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
+
+        return self.health
+
+    def add_health(self, health_points):
+        self.health += health_points
+
+        return self.health
+
+    def obtain_health(self):
+        return self.health
+
+    def calculate_cross_sectional_area(self):
+        cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
+
+        return cross_sectional_area
+
+    def calculate_damage(self, duration):
+        return duration * self.fire_rate * self.damage_per_round
