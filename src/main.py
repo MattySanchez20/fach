@@ -4,7 +4,7 @@ from datetime import datetime
 from time import sleep
 
 from jets import F16, F22
-from utils import dogfight
+from utils import exchange
 
 log_filename = f"dogfight_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
@@ -42,17 +42,16 @@ def main():
             f"Both jets fired cannons for {duration} seconds at a distance of {distance}..."
         )
 
-        # TODO: dogfight is not the right word, it should be exchange
-        dogfight_details = dogfight(
+        exchange_details = exchange(
             fighter1=fighter1, fighter2=fighter2, distance=distance, duration=duration
         )
-        logging.debug(dogfight_details)
+        logging.debug(exchange_details)
 
         f1_ammo_left, f1_health_post_hit, f1_hit_bool, f2_damage_inflicted_on_f1 = (
-            dogfight_details["fighter1"]
+            exchange_details["fighter1"]
         )
         f2_ammo_left, f2_health_post_hit, f2_hit_bool, f1_damage_inflicted_on_f2 = (
-            dogfight_details["fighter2"]
+            exchange_details["fighter2"]
         )
 
         if f1_health_post_hit <= 0:
@@ -77,20 +76,20 @@ def main():
 
         if f1_hit_bool:
             logging.info(
-                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}..."
+                f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}..."
             )
         else:
             logging.info(
-                f"{fighter1.name} post dogfight details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent..."
+                f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent..."
             )
 
         if f2_hit_bool:
             logging.info(
-                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}..."
+                f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}..."
             )
         else:
             logging.info(
-                f"{fighter2.name} post dogfight details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent..."
+                f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent..."
             )
 
 

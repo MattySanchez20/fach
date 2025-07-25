@@ -50,7 +50,7 @@ def hit_or_miss(p_1: float, p_2: float):
     return f1_hit, f2_hit
 
 
-def dogfight(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
+def exchange(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
     """1 V 1 A Single Exchange"""
 
     # obtain probabilities for given distance
