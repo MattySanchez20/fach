@@ -102,6 +102,7 @@ class F16(JetFighter):
     def calculate_damage(self, duration):
         return duration * self.fire_rate * self.damage_per_round
 
+
 class F18(JetFighter):
 
     def __init__(self):

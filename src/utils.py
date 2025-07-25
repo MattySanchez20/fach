@@ -31,10 +31,11 @@ def p_by_distance(fighter1: JetFighter, fighter2: JetFighter, d_12):
 
     return (p_1, p_2)
 
+
 def hit_or_miss(p_1: float, p_2: float):
     f1_zero_to_one_rand_float = random.uniform(0, 1)
     f2_zero_to_one_rand_float = random.uniform(0, 1)
-    
+
     f1_hit = False
     f2_hit = False
 
@@ -68,7 +69,7 @@ def dogfight(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
         f1_damage_inflicted_on_f2 = fighter1.calculate_damage(duration=duration)
 
         f2_health_post_hit = fighter2.deduct_health(damage=f1_damage_inflicted_on_f2)
-    else: # no hit
+    else:  # no hit
         f1_damage_inflicted_on_f2 = 0
         f2_health_post_hit = fighter2.health
 
@@ -78,11 +79,21 @@ def dogfight(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
         f2_damage_inflicted_on_f1 = fighter2.calculate_damage(duration=duration)
 
         f1_health_post_hit = fighter1.deduct_health(damage=f2_damage_inflicted_on_f1)
-    else: # no hit
+    else:  # no hit
         f2_damage_inflicted_on_f1 = 0
         f1_health_post_hit = fighter1.health
 
     return {
-        "fighter1": [f1_ammo_left, f1_health_post_hit, f1_hit_bool, f2_damage_inflicted_on_f1],
-        "fighter2": [f2_ammo_left, f2_health_post_hit, f2_hit_bool, f1_damage_inflicted_on_f2],
+        "fighter1": [
+            f1_ammo_left,
+            f1_health_post_hit,
+            f1_hit_bool,
+            f2_damage_inflicted_on_f1,
+        ],
+        "fighter2": [
+            f2_ammo_left,
+            f2_health_post_hit,
+            f2_hit_bool,
+            f1_damage_inflicted_on_f2,
+        ],
     }
