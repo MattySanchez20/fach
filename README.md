@@ -106,6 +106,11 @@ src/
   - Higher ammunition capacity and fire rate
   - Wider cannon spread but lower damage per round
   - Cross-sectional area calculations for hit probability
+- **`F22`**: F-22 Raptor implementation with advanced fighter capabilities
+  - Extremely high damage per round (80%) with precision targeting
+  - Very tight cannon spread (2 degrees) for maximum accuracy
+  - Moderate ammunition capacity requiring strategic engagement management
+  - Largest wingspan providing increased target profile but superior performance
 
 #### `utils.py`
 - **`p_by_distance()`**: Calculates hit probability based on distance, cannon spread, and target cross-section
