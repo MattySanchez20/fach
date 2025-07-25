@@ -85,7 +85,7 @@ class F16(JetFighter):
 
     def obtain_health(self):
         return self.health
-    
+
     def calculate_cross_sectional_area(self):
         cross_sectional_area = (self.wingspan / 2) ** 2 * 3.141
 

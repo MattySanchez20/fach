@@ -4,13 +4,13 @@ from time import sleep
 
 from jets import JetFighter
 
+
 def _calculate_cannon_spread_area(d_ab: float, jet: JetFighter):
 
-    jet_cannon_spread_area = (
-        math.tan(jet.cannon_spread_rads) * d_ab
-    ) ** 2 * 3.141
+    jet_cannon_spread_area = (math.tan(jet.cannon_spread_rads) * d_ab) ** 2 * 3.141
 
     return jet_cannon_spread_area
+
 
 def p_by_distance(attacker: JetFighter, defender: JetFighter, d_ab):
 
