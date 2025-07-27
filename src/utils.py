@@ -1,9 +1,9 @@
 import math
 import random
+from logging import Logger
+from time import sleep
 
 from jets import JetFighter
-from time import sleep
-from logging import Logger
 
 
 def _calculate_cannon_spread_area(d_12: float, jet: JetFighter):
@@ -189,8 +189,14 @@ def exchange(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
     }
 
 
-def dogfight(fighter1: JetFighter, fighter2: JetFighter, logger: Logger, start_distance: int = 1000, step_size: int = -50, max_exchange_duration: int = 10):
-
+def dogfight(
+    fighter1: JetFighter,
+    fighter2: JetFighter,
+    logger: Logger,
+    start_distance: int = 1000,
+    step_size: int = -50,
+    max_exchange_duration: int = 10,
+):
     # Log detailed initial state for debugging purposes
     logger.info(f"{fighter1.name} Jet Specs: {fighter1}")
     logger.info(f"{fighter2.name} Jet Specs: {fighter2}")

@@ -1,9 +1,9 @@
 import logging
+import os
 from datetime import datetime
 
 from jets import F16, F18
 from utils import dogfight
-import os
 
 
 def main():
@@ -32,8 +32,9 @@ def main():
     logger.info("Initializing jets...")
     fighter1 = F16()
     fighter2 = F18()
-    
-    dogfight(fighter1=fighter1, fighter2=fighter2, logger=logger)    
+
+    dogfight(fighter1=fighter1, fighter2=fighter2, logger=logger)
+
 
 if __name__ == "__main__":
     main()
