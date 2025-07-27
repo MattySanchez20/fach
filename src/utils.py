@@ -3,6 +3,7 @@ import random
 
 from jets import JetFighter
 from time import sleep
+from logging import Logger
 
 
 def _calculate_cannon_spread_area(d_12: float, jet: JetFighter):
@@ -188,34 +189,29 @@ def exchange(fighter1: JetFighter, fighter2: JetFighter, distance, duration):
     }
 
 
-def dogfight(fighter1: JetFighter, fighter2: JetFighter, start_distance: int, step_size: int):
-
-    # Log successful initialization with fighter specifications
-    # logging.info(f"{fighter1.name} initialized successfully. Jet Specs: {fighter1}")
-    # logging.info(f"{fighter2.name} initialized successfully. Jet Specs: {fighter2}")
+def dogfight(fighter1: JetFighter, fighter2: JetFighter, logger: Logger, start_distance: int = 1000, step_size: int = -50, max_exchange_duration: int = 10):
 
     # Log detailed initial state for debugging purposes
-    # logging.debug(f"{fighter1.name} initial state: {fighter1}")
-    # logging.debug(f"{fighter2.name} initial state: {fighter2}")
+    logger.info(f"{fighter1.name} Jet Specs: {fighter1}")
+    logger.info(f"{fighter2.name} Jet Specs: {fighter2}")
 
-    # logging.info(f"Dogfight initiated at a starting distance of {start_distance}...")
+    logger.info(f"Dogfight initiated at a starting distance of {start_distance}...")
 
-    # Main combat loop: fighters close distance in 50-unit increments
-    # Combat continues until one fighter is destroyed or runs out of ammo
+    # looping through exchanges at closer and closer distances
     for distance in range(start_distance, 0, step_size):
         # Signal start of combat exchange at current distance
-        # logging.info("FIGHTING......")
+        logger.info("FIGHTING......")
 
         # Generate random firing duration (0-10 seconds) to simulate variable engagement
-        duration = random.uniform(0, 10)
+        duration = random.uniform(0, max_exchange_duration)
 
         # Add realistic delay to simulate combat duration
         sleep(duration)
 
         # Log the combat parameters for this exchange
-        # logging.info(
-        #     f"Both jets fired cannons for {duration} seconds at a distance of {distance}..."
-        # )
+        logger.info(
+            f"Both jets fired cannons for {duration} seconds at a distance of {distance}..."
+        )
 
         # Execute the combat exchange using the utils.exchange function
         # This calculates hit probabilities, determines hits/misses, and applies damage
@@ -223,7 +219,7 @@ def dogfight(fighter1: JetFighter, fighter2: JetFighter, start_distance: int, st
             fighter1=fighter1, fighter2=fighter2, distance=distance, duration=duration
         )
         # Log detailed exchange results for debugging
-        # logging.debug(exchange_details)
+        logger.debug(exchange_details)
 
         # Unpack combat results for both fighters
         # Fighter1 results: [ammo_remaining, health_after_damage, hit_opponent, damage_received]
@@ -237,52 +233,48 @@ def dogfight(fighter1: JetFighter, fighter2: JetFighter, start_distance: int, st
 
         # Check victory conditions - Fighter1 destroyed
         if f1_health_post_hit <= 0:
-            # logging.info(f"The {fighter2.name} has destroyed the {fighter1.name}.")
+            logger.info(f"The {fighter2.name} has destroyed the {fighter1.name}.")
             break
 
         # Check victory conditions - Fighter2 destroyed
         if f2_health_post_hit <= 0:
-            # logging.info(f"The {fighter1.name} has destroyed the {fighter2.name}.")
+            logger.info(f"The {fighter1.name} has destroyed the {fighter2.name}.")
             break
 
         # Check escape conditions - Fighter1 out of ammunition
         if f1_ammo_left == 0:
-            # logging.info(
-            #     f"The {fighter1.name} has run out of ammo. It puts on the afterburners and escapes."
-            # )
+            logger.info(
+                f"The {fighter1.name} has run out of ammo. It puts on the afterburners and escapes."
+            )
             break
 
         # Check escape conditions - Fighter2 out of ammunition
         if f2_ammo_left == 0:
-            # logging.info(
-            #     f"The {fighter2.name} has run out of ammo. It puts on the afterburners and escapes."
-            # )
+            logger.info(
+                f"The {fighter2.name} has run out of ammo. It puts on the afterburners and escapes."
+            )
             break
 
         # Log Fighter1 post-exchange status with hit/miss information
         if f1_hit_bool:
             # Fighter1 successfully hit Fighter2 - log damage inflicted
-            # logging.info(
-            #     f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}..."
-            # )
-            ...
+            logger.info(
+                f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, damage inflicted on opponent={f1_damage_inflicted_on_f2}..."
+            )
         else:
             # Fighter1 missed Fighter2 - no damage inflicted
-            # logging.info(
-            #     f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent..."
-            # )
-            ...
+            logger.info(
+                f"{fighter1.name} post exchange details: health={f1_health_post_hit}, cannon ammo={f1_ammo_left}, no damage inflicted on opponent..."
+            )
 
         # Log Fighter2 post-exchange status with hit/miss information
         if f2_hit_bool:
             # Fighter2 successfully hit Fighter1 - log damage inflicted
-            # logging.info(
-            #     f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}..."
-            # )
-            ...
+            logger.info(
+                f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, damage inflicted on opponent={f2_damage_inflicted_on_f1}..."
+            )
         else:
             # Fighter2 missed Fighter1 - no damage inflicted
-            # logging.info(
-            #     f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent..."
-            # )
-            ...
+            logger.info(
+                f"{fighter2.name} post exchange details: health={f2_health_post_hit}, cannon ammo={f2_ammo_left}, no damage inflicted on opponent..."
+            )
