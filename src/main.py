@@ -63,7 +63,6 @@ def main():
     # Main combat loop: fighters close distance in 50-unit increments
     # Combat continues until one fighter is destroyed or runs out of ammo
     for distance in range(start_distance, 0, -50):
-
         # Signal start of combat exchange at current distance
         logging.info("FIGHTING......")
 
