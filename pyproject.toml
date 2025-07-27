@@ -1,20 +1,14 @@
 [project]
 name = "fach"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
+description = "LogWars"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "pandas (>=2.3.1,<3.0.0)",
-    "matplotlib (>=3.10.3,<4.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-    "isort (>=6.0.1,<7.0.0)"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "isort>=6.0.1",
+    "pytest>=8.4.1",
+    "ruff>=0.12.5",
 ]
-
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
