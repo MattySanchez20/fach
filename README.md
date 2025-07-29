@@ -286,3 +286,9 @@ This project is open source. Please refer to the LICENSE file for details.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+
+
+C:\Users\Matias\Documents\Python Scripts\fach>
+uvicorn src.api.main:app --reload
+
+ C:\Users\Matias\Documents\Python Scripts\fach\frontend\src> npm run dev
