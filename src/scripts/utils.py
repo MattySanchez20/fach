@@ -3,7 +3,7 @@ import random
 from logging import Logger
 from time import sleep
 
-from jets import JetFighter
+from scripts.jets import JetFighter
 
 
 def _calculate_cannon_spread_area(d_12: float, jet: JetFighter):
