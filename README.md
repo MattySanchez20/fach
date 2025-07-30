@@ -291,4 +291,8 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 C:\Users\Matias\Documents\Python Scripts\fach>
 uvicorn src.api.main:app --reload
 
- C:\Users\Matias\Documents\Python Scripts\fach\frontend\src> npm run dev
+ C:\Users\Matias\Documents\Python Scripts\fach\dogfight-ui\src> npm install
+
+ then 
+ C:\Users\Matias\Documents\Python Scripts\fach\dogfight-ui\src> npm start
+ 
